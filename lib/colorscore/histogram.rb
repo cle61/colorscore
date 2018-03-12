@@ -7,10 +7,38 @@ module Colorscore
       @lines = output.lines.sort.reverse.map(&:strip).reject(&:empty?)
     end
 
+    def get_lines
+      @lines
+    end
+
+    def toto
+      colors = []
+      @lines.each do |line|
+        color = line.scan(/\d{1,3},\d{1,3},\d{1,3}/).first
+        color = color.split(',')
+        puts color.inspect
+        colors << rgb(color[0].to_i, color[1].to_i, color[2].to_i)
+      end
+      colors
+    end
+
+    def rgb(r, g, b)
+      "##{to_hex r}#{to_hex g}#{to_hex b}"
+    end
+    def to_hex(n)
+      n.to_s(16).rjust(2, '0').upcase
+    end
+
     # Returns an array of colors in descending order of occurances.
     def colors
-      hex_values = @lines.map { |line| line[/#([0-9A-F]{6}) /, 1] }.compact
-      hex_values.map { |hex| Color::RGB.from_html(hex) }
+      colors = []
+      @lines.each do |line|
+        color = line.scan(/\d{1,3},\d{1,3},\d{1,3}/).first
+        color = color.split(',')
+        puts color.inspect
+        colors << rgb(color[0].to_i, color[1].to_i, color[2].to_i)
+      end
+      colors
     end
 
     def color_counts
