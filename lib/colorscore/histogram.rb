@@ -11,17 +11,6 @@ module Colorscore
       @lines
     end
 
-    def toto
-      colors = []
-      @lines.each do |line|
-        color = line.scan(/\d{1,3},\d{1,3},\d{1,3}/).first
-        color = color.split(',')
-        puts color.inspect
-        colors << rgb(color[0].to_i, color[1].to_i, color[2].to_i)
-      end
-      colors
-    end
-
     def rgb(r, g, b)
       "##{to_hex r}#{to_hex g}#{to_hex b}"
     end
@@ -35,7 +24,6 @@ module Colorscore
       @lines.each do |line|
         color = line.scan(/\d{1,3},\d{1,3},\d{1,3}/).first
         color = color.split(',')
-        puts color.inspect
         colors << rgb(color[0].to_i, color[1].to_i, color[2].to_i)
       end
       colors
