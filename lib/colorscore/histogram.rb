@@ -23,6 +23,7 @@ module Colorscore
       colors = []
       @lines.each do |line|
         color = line.scan(/\d{1,3},\d{1,3},\d{1,3}/).first
+        next if color.blank?
         color = color.split(',')
         colors << rgb(color[0].to_i, color[1].to_i, color[2].to_i)
       end
